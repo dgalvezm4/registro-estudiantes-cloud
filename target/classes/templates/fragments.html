@@ -1,0 +1,6 @@
+<!DOCTYPE html><html lang="es" xmlns:th="http://www.thymeleaf.org"><body>
+<header th:fragment="header(active)" class="topbar">
+  <a class="brand" th:href="@{/registro}"><span class="brand-mark">E</span><span><b>EstudiaGT</b><small>Registro académico</small></span></a>
+  <nav><a th:href="@{/registro}" th:classappend="${active == 'registro'} ? 'active' : ''">Registrar estudiante</a><a th:href="@{/consulta}" th:classappend="${active == 'consulta'} ? 'active' : ''">Consultar registros</a></nav>
+</header>
+</body></html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Consulta de estudiantes | EstudiaGT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body><header th:replace="~{fragments :: header('consulta')}"></header>
+<main class="page-shell wide">
+  <section class="intro consultation"><div><span class="eyebrow">DIRECTORIO ACADÉMICO</span><h1>Estudiantes registrados</h1><p>Consulta la información almacenada por el Web Service.</p></div><a class="primary-link" th:href="@{/registro}">Nuevo estudiante</a></section>
+  <section class="table-card">
+    <div class="toolbar"><div class="search-box"><span>Buscar</span><input id="searchInput" type="search" placeholder="Carné, nombre, correo o carrera"></div><button id="refreshButton" class="refresh">Actualizar</button></div>
+    <div class="summary"><b id="resultCount">0 estudiantes</b><span id="lastUpdate"></span></div>
+    <div id="tableAlert" class="alert" hidden></div>
+    <div class="table-wrap"><table><thead><tr><th>Carné</th><th>Nombre completo</th><th>Correo</th><th>Carrera</th><th>Teléfono</th><th>Nacimiento</th><th>Género</th><th>Registrado</th></tr></thead><tbody id="studentRows"><tr><td colspan="8" class="empty">Cargando registros…</td></tr></tbody></table></div>
+  </section>
+</main>
+<script th:src="@{/js/consulta.js}"></script>
+</body></html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Registro de estudiantes | EstudiaGT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body><header th:replace="~{fragments :: header('registro')}"></header>
+<main class="page-shell">
+  <section class="intro"><span class="eyebrow">NUEVO REGISTRO</span><h1>Inscribe a un estudiante</h1><p>Completa la información solicitada. Todos los campos se validan antes de habilitar el envío.</p></section>
+  <section class="form-card">
+    <div class="form-title"><span class="icon-box">01</span><div><h2>Información del estudiante</h2><p>Los datos serán enviados al Web Service mediante POST.</p></div></div>
+    <div id="alert" class="alert" hidden></div>
+    <form id="studentForm" novalidate>
+      <div class="form-grid">
+        <div class="field"><label for="carne">Carné</label><input id="carne" name="carne" type="text" minlength="8" maxlength="30" pattern="[A-Za-z0-9]+" placeholder="09001234" required><small>Mínimo 8 caracteres, solo letras y números.</small><span class="error"></span></div>
+        <div class="field"><label for="correo">Correo electrónico</label><input id="correo" name="correo" type="email" maxlength="160" placeholder="estudiante@correo.com" required><small>Ingrese un correo válido.</small><span class="error"></span></div>
+        <div class="field"><label for="nombres">Nombres</label><input id="nombres" name="nombres" type="text" maxlength="100" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]+" placeholder="Dylan Ricardo" required><small>Solo letras y espacios.</small><span class="error"></span></div>
+        <div class="field"><label for="apellidos">Apellidos</label><input id="apellidos" name="apellidos" type="text" maxlength="100" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]+" placeholder="Gálvez Mijangos" required><small>Solo letras y espacios.</small><span class="error"></span></div>
+        <div class="field"><label for="carrera">Carrera</label><select id="carrera" name="carrera" required><option value="">Seleccione una carrera</option><option th:each="c:${carreras}" th:value="${c}" th:text="${c}"></option></select><span class="error"></span></div>
+        <div class="field"><label for="telefono">Teléfono</label><input id="telefono" name="telefono" type="tel" pattern="(?:\+502[ -]?)?[2-7][0-9]{3}[ -]?[0-9]{4}" placeholder="5555-1234" required><small>Formato guatemalteco: 5555-1234.</small><span class="error"></span></div>
+        <div class="field"><label for="fechaNacimiento">Fecha de nacimiento</label><input id="fechaNacimiento" name="fechaNacimiento" type="date" th:max="${fechaMaxima}" required><small>Debe tener al menos 16 años.</small><span class="error"></span></div>
+        <fieldset class="field gender"><legend>Género</legend><div class="radio-row"><label><input type="radio" name="genero" value="Masculino" required><span>Masculino</span></label><label><input type="radio" name="genero" value="Femenino"><span>Femenino</span></label><label><input type="radio" name="genero" value="Otro"><span>Otro</span></label></div><span class="error"></span></fieldset>
+        <div class="captcha-wrap span-2"><div class="g-recaptcha" th:attr="data-sitekey=${recaptchaSiteKey}" data-callback="captchaCompletado" data-expired-callback="captchaExpirado" data-error-callback="captchaError"></div><span id="captchaError" class="error"></span></div>
+      </div>
+      <div class="form-actions"><span id="formStatus">Completa todos los campos para continuar</span><button id="submitButton" type="submit" disabled>Registrar estudiante</button></div>
+    </form>
+  </section>
+</main>
+<script th:src="@{/js/registro.js}"></script><script src="https://www.google.com/recaptcha/api.js?hl=es" async defer></script>
+</body></html>
